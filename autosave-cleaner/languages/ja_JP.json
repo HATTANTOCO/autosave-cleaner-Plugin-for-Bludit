@@ -1,0 +1,8 @@
+{
+	"plugin-data":
+	{
+		"name": "autosave-Cleaner",
+		"description": "管理者がログイン、管理画面が読み込まれたタイミングで autosave- で始まるページデータを一括削除します。"
+	},
+	"ac-alert-count": "%d 件のオートセーブを削除しました。"
+}
