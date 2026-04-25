@@ -2,6 +2,7 @@
 class PluginAutosaveCleaner extends Plugin {
 
     // プラグインのためのDB基本設定（今後、管理画面作成の場合などで利用）
+    // Basic Database Settings for Plugins (to be used when creating an admin panel, etc.)
     public function init() {
         $this->dbFields = array();
     }
@@ -40,9 +41,15 @@ class PluginAutosaveCleaner extends Plugin {
     // Deleting Folders and Database Entries
                 $pageKeys = array_keys($pages->db);
                 foreach ($pageKeys as $key) {
+    // 1. キーが autosave- で始まるかチェック
+    // 1. Check if the key starts with 'autosave-'
                     if (strpos($key, 'autosave-') === 0) {
-                        if ($pages->delete($key)) {
-                            $count++;
+    // 2. データベースの生データを直接参照して autosave タイプであることをチェック
+    // 2. Check whether it is an 'autosave' type by directly referencing the raw data in the database
+                        if (isset($pages->db[$key]['type']) && $pages->db[$key]['type'] === 'autosave') {
+                            if ($pages->delete($key)) {
+                                $count++;
+                            }
                         }
                     }
                 }
